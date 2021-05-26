@@ -1,8 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useState, useEffect} from 'react';
 import {KeyboardAvoidingView, Image, TextInput, TouchableOpacity, Text, View} from 'react-native';
 import {css} from '../assets/css/Css';
 
-export default function Login()
+export default function Login({navigation})
 {
     const [display, setDisplay]=useState('none');
     const [user, setUser]=useState(null);
@@ -30,6 +31,9 @@ export default function Login()
             setTimeout(()=>{
                 setDisplay('none');
             },5000);
+        }else{
+            await AsyncStorage.setItem('userData', JSON.stringify(json));
+            navigation.navigate('AreaRestrita');
         }
     }
 

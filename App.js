@@ -6,6 +6,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from './views/Home';
 import Login from './views/Login';
 import Rastreio from './views/Rastreio';
+import AreaRestrita from './views/areaRestrita/AreaRestrita';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
 
@@ -33,7 +35,7 @@ export default function App() {
           />
           <Stack.Screen name="Login" options={{headerShown:false}} component={Login} />
           <Stack.Screen name="Rastreio" component={Rastreio} />
-          {/* <Stack.Screen name="AreaRestrita" component={AreaRestrita} /> */}
+          <Stack.Screen name="AreaRestrita" component={AreaRestrita} />
         </Stack.Navigator>
       </NavigationContainer>
   );

@@ -27,6 +27,30 @@ app.post('/login', async (req,res)=>{
     }
 });
 
+app.post('/verifyPass',async (req,res)=>{
+    let response = await user.findOne({
+        where: {id:req.body.id, password:req.body.senhaAntiga}
+    });
+    console.log(response);
+    if(response === null)
+    {
+        res.send(JSON.stringify('Senha antiga inválida'));
+    }
+    else
+    {
+        if(req.body.novaSenha === req.body.confNovaSenha)
+        {
+            response.password=req.body.novaSenha;
+            response.save();
+            res.send(JSON.stringify('Senha atualizada com sucesso!'));
+        }else{
+            res.send(JSON.stringify('Os campos Nova Senha e Confirmação são diferentes!'));
+        }
+        
+    }
+    console.log(req.body);
+});
+
 let port=process.env.PORT || 3000;
 app.listen(port,(req,res)=>{
     console.log('Servidor Rodando');

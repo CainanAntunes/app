@@ -4,12 +4,7 @@
     "start": "node Controller.ja"
   },
   "dependencies": {
-    "name": "TrackIt",
-    "description": "Rastreio de encomendas",
-    "version": "1.0.0",
-    "engines": {
-      "node": "15.11.00"
-    },
+    "engines": "15.11.0",
     "@react-native-async-storage/async-storage": "^1.15.4",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/material-bottom-tabs": "^5.3.15",

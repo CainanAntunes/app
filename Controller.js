@@ -51,6 +51,23 @@ app.post('/verifyPass',async (req,res)=>{
     console.log(req.body);
 });
 
+//Criação do produto no banco
+app.post('/create',async (req,res)=>{
+    let trakingId='';
+   await traking.create({
+     userId: req.body.userId,
+       code: req.body.code,
+       local: req.body.local
+   }).then((response)=>{
+       trakingId+=response.id;
+   });
+
+   await product.create({
+       trackingId: trakingId,
+       name: req.body.product
+   });
+});
+
 let port=process.env.PORT || 3000;
 app.listen(port,(req,res)=>{
     console.log('Servidor Rodando');

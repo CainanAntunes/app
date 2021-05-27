@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react';
-import {Text, View, Button, Settings} from 'react-native';
+import {Text, View, Button, Settings, BackHandler, Alert} from 'react-native';
 import {css} from '../../assets/css/Css';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -8,9 +8,7 @@ import Cadastro from './Cadastro';
 import Edicao from './Edicao';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-//import { useEffect, useState } from 'react/cjs/react.production.min';
-
-export default function AreaRestrita() {
+export default function AreaRestrita({navigation}) {
     
     const Tab = createMaterialBottomTabNavigator();
     const [user,setUser]=useState(null);
@@ -25,6 +23,30 @@ export default function AreaRestrita() {
        getUser();
     });
 
+    useEffect(() => {
+        const backAction = () => {
+            Alert.alert("Alerta!", "Fazer Logout?", [
+                {
+                    text: "Não",
+                    onPress: () => null,
+                    style: "cancel"
+                },
+                { text: "Sim", onPress: () => {
+                    navigation.navigate('Home');
+                    }
+                }
+            ]);
+            return true;
+        };
+    
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
+    
+        return () => backHandler.remove();
+    }, []);
+
     return (
         <Tab.Navigator
                 activeColor='#fff'
@@ -33,7 +55,7 @@ export default function AreaRestrita() {
         >
 
             <Tab.Screen
-                    name="Profile"
+                    name="Senha"
                     component={Profile}
                     options={{
                     tabBarIcon:()=>(

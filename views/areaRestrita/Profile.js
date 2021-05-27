@@ -47,15 +47,15 @@ export default function Profile({navigation}) {
 
     return (
         <View style={[css.container,css.containerTop]}>
-            <MenuAreaRestrita title='Perfil' navigation={navigation}/>
+            <MenuAreaRestrita title='Trocar Senha' navigation={navigation}/>
 
             <View>
                 <Text>{msg}</Text>
                 <TextInput placeholder='Senha Antiga:' onChangeText={text=>setSenhaAntiga(text)} />
                 <TextInput placeholder='Nova Senha:' onChangeText={text=>setNovaSenha(text)} />
                 <TextInput placeholder='Confirmação da Nova Senha:' onChangeText={text=>setConfNovaSenha(text)} />
-                <TouchableOpacity onPress={()=>sendForm()}>
-                    <Text>Trocar</Text>
+                <TouchableOpacity style={css.login__button} onPress={()=>sendForm()}>
+                    <Text>Trocar Senha</Text>
                 </TouchableOpacity>
             </View>
 

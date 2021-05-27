@@ -1,9 +1,11 @@
 import React, {useState,useEffect} from 'react';
-import {Text, TouchableOpacity, View, TextInput} from "react-native";
+import {Text, TouchableOpacity, View, TextInput, Image, Button} from "react-native";
 import {css} from '../../assets/css/Css';
 import MenuAreaRestrita from '../../assets/components/MenuAreaRestrita';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import config from '../../config/config.json';
+import * as Sharing from 'expo-sharing';
+import * as FileSystem from 'expo-file-system';
 
 
 export default function Cadastro({navigation}) {
@@ -20,7 +22,8 @@ export default function Cadastro({navigation}) {
 
     useEffect(()=>{
         randomCode();
-    },[]);
+        setProduct(null);
+    },[response]);
 
     //Pegar o id do usuário
     async function getUser()
@@ -56,16 +59,39 @@ export default function Cadastro({navigation}) {
                 local: address
             })
         });
+        let json=await response.json();
+        setResponse(json);
+    }
+
+    //Compartilhar QRcode
+    async function shareQR()
+    {
+        const image=config.urlRoot+'img/code.png';
+        FileSystem.downloadAsync(
+            image,
+            FileSystem.documentDirectory+'.png'
+        ).then(({uri})=>{
+            Sharing.shareAsync(uri);
+        });
+        await Sharing.shareAsync();
     }
 
     return (
-        <View>
+        <View style={[css.container, css.containerTop]}>
             <MenuAreaRestrita title='Cadastro' navigation={navigation} />
+
+            {response && (
+                <View>
+                    <Image source={{uri:response, height:180, width:180}} />
+                    <Button title='Compartilhar' onPress={()=>shareQR()} />
+                </View>
+            )}
 
             <View style={css.login__input}>
                 <TextInput
                         placeholder='Descrição do Produto:'
                         onChangeText={text=>setProduct(text)}
+                        value={product}
                 />
             </View>
 

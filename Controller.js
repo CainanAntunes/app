@@ -3,11 +3,13 @@ const cors=require('cors');
 const bodyParses=require('body-parser');
 const models=require('./models');
 const { response } = require('express');
+const QRCode = require('qrcode');
 
 const app=express();
 app.use(cors());
 app.use(bodyParses.urlencoded({extended: false}));
 app.use(bodyParses.json());
+app.use(express.static('assets'));
 let user=models.User;
 let traking=models.Traking;
 let product=models.Product;
@@ -66,6 +68,15 @@ app.post('/create',async (req,res)=>{
        trackingId: trakingId,
        name: req.body.product
    });
+
+   QRCode.toDataURL(req.body.code).then(url=>{
+        QRCode.toFile(
+            './assets/img/code.png',
+            req.body.code
+        );
+        res.send(JSON.stringify(url));
+    })
+
 });
 
 let port=process.env.PORT || 3000;

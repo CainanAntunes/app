@@ -20,6 +20,6 @@
     "host": "us-cdbr-east-03.cleardb.com",
     "dialect": "mysql"
   },
-  "urlRoot": "http://192.168.1.103:3000/",
+  "urlRoot": "https://apptrackit.herokuapp.com/",
   "origin": "Av. Paulista, 200 - São Paulo / SP"
 }

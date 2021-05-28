@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "252713189040",
+    "project_id": "trackit-315022",
+    "storage_bucket": "trackit-315022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252713189040:android:b0e2d824a523f2b009c575",
+        "android_client_info": {
+          "package_name": "com.facens.trackit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252713189040-3i7edtegh23h4ktrgh1l3rfv5sqiu8go.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSQrc3-nL4zc0-qra4ricOWlD_hBibAxg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252713189040-3i7edtegh23h4ktrgh1l3rfv5sqiu8go.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

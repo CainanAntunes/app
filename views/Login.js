@@ -94,7 +94,7 @@ export default function Login({navigation})
             </View>
 
             <View>
-                <Text style={css.login__msg(display)}>Usuário ou senha inválidos!</Text>
+                <Text style={css.login__msg(display)}>Usuário ou senha inválido! Use Marc 1234.</Text>
             </View>
 
             <View style={css.login__form}>

@@ -4,6 +4,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {css} from '../../assets/css/Css';
 import MenuAreaRestrita from '../../assets/components/MenuAreaRestrita';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import config from '../../config/config.json';
+import * as Location from 'expo-location';
+import Geocoder from 'react-native-geocoding';
 
 
 export default function Edicao({navigation}) {
@@ -14,6 +17,7 @@ export default function Edicao({navigation}) {
     const [code, setCode] = useState(null);
     const [product, setProduct] = useState(null);
     const [localization, setLocalization] = useState(null);
+    const [response, setResponse] = useState(null);
 
     useEffect(() => {
         (async () => {
@@ -22,16 +26,82 @@ export default function Edicao({navigation}) {
         })();
     }, []);
 
+    useEffect(()=>{
+        (async () => {
+            let { status } = await Location.requestPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+            }
+        })();
+    });
+
     //Leitura do código QR
     async function handleBarCodeScanned({ type, data }){
         setScanned(true);
         setDisplayQR('none');
         setDisplayForm('flex');
         setCode(data);
+        await getLocation();
+        await setProduct(data);
     }
 
-    async function sendForm() {
+    async function searchProduct(codigo)
+    {
+        let response=await fetch(config.urlRoot+'searchProduct',{
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                code: codigo
+            })
+        });
+        let json=await response.json();
+        setProduct(json.Products[0].name);
+    }
 
+    //Envia o formulário com os dados para edição
+    async function sendForm() {
+        let response=await fetch(config.urlRoot+'update',{
+        method: 'POST',
+        headers:{
+                Accept: 'application/json',
+            'Content-type':'application/json'
+        },
+            body: JSON.stringify({
+                code: code,
+                product: product,
+                local: localization
+            })
+        });
+        let json=await response.json();
+        setResponse(json);
+    }
+
+    //Nova leitura do QRCode
+    async function readAgain()
+    {
+        setScanned(false);
+        setDisplayQR('flex');
+        setDisplayForm('none');
+        setCode(null);
+        setProduct(null);
+        setLocalization(null);
+    }
+
+    //Retorna a posição e endereço do usuário
+    async function getLocation()
+    {
+        let location = await Location.getCurrentPositionAsync({});
+        Geocoder.init(config.geocodingAPI);
+        Geocoder.from(location.coords.latitude, location.coords.longitude)
+            .then(json => {
+                let number = json.results[0].address_components[0].short_name;
+                let street = json.results[0].address_components[1].short_name;
+                setLocalization(`${street} - ${number}`);
+            })
+            .catch(error => console.warn(error));
     }
 
     return (
@@ -44,7 +114,7 @@ export default function Edicao({navigation}) {
             />
 
             <View style={css.qr__form(displayForm)}>
-                <Text>Código do Produto: {code}</Text>
+                <Text style={css.sucess__text}>{response}</Text>
 
                 <View style={css.login__input}>
                     <TextInput
@@ -65,6 +135,15 @@ export default function Edicao({navigation}) {
                 <TouchableOpacity style={css.login__button} onPress={()=>sendForm()}>
                     <Text>Atualizar</Text>
                 </TouchableOpacity>
+
+                {scanned &&
+                    <View>
+                        <Button style={css.rescanner__button}
+                                title='Escanear Novamente'
+                                onPress={()=>readAgain()}
+                        />
+                    </View>
+                }
             </View>
         </View>
     );

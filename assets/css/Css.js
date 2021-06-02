@@ -95,7 +95,22 @@ const css = StyleSheet.create({
     qr__form:(display='none')=>({
       width: '100%',
       display:display
-    })
+    }),
+    rescanner__button: {
+      marginTop: 10
+    },
+    sucess__text: {
+      marginTop: 10,
+      marginBottom: 10,
+      textAlign: "center",
+      backgroundColor: "#16ff16"
+    },
+    rastreio__inputMargin:{
+      marginTop: 20,
+      marginBottom: 30,
+      borderColor: '#0e71a8',
+      borderBottomWidth: 1,
+    }
   });
 
   export {css};

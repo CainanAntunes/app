@@ -34,7 +34,20 @@ export default function App() {
             }} 
           />
           <Stack.Screen name="Login" options={{headerShown:false}} component={Login} />
-          <Stack.Screen name="Rastreio" component={Rastreio} />
+          <Stack.Screen name="Rastreio" component={Rastreio} 
+            options=
+            {{
+              title: "Rastreie sua encomenda",
+              headerStyle: {backgroundColor: '#0e71a8' },
+              headerTintColor: '#333',
+              headerTitleStyle: 
+              {
+                fontWeight: 'bold', 
+                color: '#fff', 
+                fontSize: 20
+              }
+            }} 
+          />
           <Stack.Screen name="AreaRestrita" options={{headerShown: false}} component={AreaRestrita} />
         </Stack.Navigator>
       </NavigationContainer>

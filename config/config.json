@@ -21,5 +21,6 @@
     "dialect": "mysql"
   },
   "urlRoot": "https://apptrackit.herokuapp.com/",
-  "origin": "Av. Paulista, 200 - São Paulo / SP"
+  "origin": "Av. Paulista, 200 - São Paulo / SP",
+  "geocodingAPI": "AIzaSyATAXFaLoEJ5pT1YmvVc-szBpeHyM67RGw"
 }

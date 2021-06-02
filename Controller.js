@@ -14,6 +14,7 @@ let user=models.User;
 let traking=models.Traking;
 let product=models.Product;
 
+//login
 app.post('/login', async (req,res)=>{
     let response = await user.findOne({
         where: {name:req.body.name, password:req.body.password}

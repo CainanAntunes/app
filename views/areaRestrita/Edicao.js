@@ -120,7 +120,7 @@ export default function Edicao({navigation}) {
                     <TextInput
                             placeholder='Nome do Produto:'
                             onChangeText={text=>setProduct(text)}
-                        value={product}
+                            value={product}
                     />
                 </View>
 
@@ -128,7 +128,7 @@ export default function Edicao({navigation}) {
                     <TextInput
                             placeholder='Localização do Produto:'
                             onChangeText={text=>setLocalization(text)}
-                        value={localization}
+                            value={localization}
                     />
                 </View>
 

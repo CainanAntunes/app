@@ -107,8 +107,8 @@ app.post('/update', async (req,res)=>{
 //Exibir o local do rastreio
 app.post('/rastreio', async (req,res)=>{
     let response=await traking.findOne({
-        where:{code:req.body.code},
-        include:[{all:true}]
+        include:[{model:product}],
+        where:{code:req.body.code}
     });
     if(response === null){
         res.send(JSON.stringify(`Nenhum produto encontrado`));

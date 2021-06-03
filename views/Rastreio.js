@@ -22,8 +22,8 @@ export default function Rastreio({navigation}) {
                 code: code
             })
         });
-        console.log(code);
         let json=await response.json();
+        console.log(json);
         setResponse(json);
     }
 

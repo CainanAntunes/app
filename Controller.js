@@ -110,12 +110,11 @@ app.post('/rastreio', async (req,res)=>{
         where:{code:req.body.code},
         include:[{all:true}]
     });
-    res.send(JSON.stringify(`Sua encomenda ${response.Products[0].name} já está a caminho ${response.local}.`));
-   /*  if(response === null){
+    if(response === null){
         res.send(JSON.stringify(`Nenhum produto encontrado`));
     }else{
         res.send(JSON.stringify(`Sua encomenda ${response.Products[0].name} já está a caminho ${response.local}.`));
-    } */
+    }
 });
 
 let port=process.env.PORT || 3000;

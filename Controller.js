@@ -83,7 +83,7 @@ app.post('/create',async (req,res)=>{
 
 //Pegar os dados do produto
 app.post('/searchProduct', async (req,res)=>{
-    let response=await tracking.findOne({
+    let response=await traking.findOne({
         include:[{model:product}],
         where: {code: req.body.code}
     });
@@ -92,7 +92,7 @@ app.post('/searchProduct', async (req,res)=>{
 
 //Update dos dados da mercadoria
 app.post('/update', async (req,res)=>{
-    let response=await tracking.findOne({
+    let response=await traking.findOne({
         where: {code: req.body.code},
         include: [{all:true}]
     });
@@ -106,7 +106,7 @@ app.post('/update', async (req,res)=>{
 
 //Exibir o local do rastreio
 app.post('/rastreio', async (req,res)=>{
-    let response=await tracking.findOne({
+    let response=await traking.findOne({
         where:{code:req.body.code},
         include:[{all:true}]
     });

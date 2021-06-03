@@ -109,13 +109,10 @@ app.post('/rastreio', async (req,res)=>{
     let response=await traking.findOne({
         where:{code:req.body.code}
     });
-    let response2=await product.findOne({
-        where:{trakingId:response.id}
-    });
     if(response === null){
         res.send(JSON.stringify(`Nenhum produto encontrado`));
     }else{
-        res.send(JSON.stringify(`Sua encomenda, ${response2.name},já está a caminho. Localização: ${response.local}.`));
+        res.send(JSON.stringify(`Sua encomenda,já está a caminho. Localização: ${response.local}.`));
     }
 });
 

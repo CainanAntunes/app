@@ -12,7 +12,7 @@ export default function Rastreio({navigation}) {
     //Envia os dados do formulário
     async function sendForm()
     {
-        let response=await fetch(`${config.urlRoot}rastreio`,{
+        let response=await fetch(config.urlRoot+'rastreio',{
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -22,8 +22,8 @@ export default function Rastreio({navigation}) {
                 code: code
             })
         });
+        console.log(response.body);
         let json=await response.json();
-        console.log(json);
         setResponse(json);
     }
 

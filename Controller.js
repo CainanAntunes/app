@@ -113,7 +113,7 @@ app.post('/rastreio', async (req,res)=>{
     if(response === null){
         res.send(JSON.stringify(`Nenhum produto encontrado`));
     }else{
-        res.send(JSON.stringify(`Sua encomenda ${response.Products[0].name} já está a caminho ${response.local}.`));
+        res.send(JSON.stringify(`Sua encomenda já está a caminho ${response.local}.`));
     }
 });
 

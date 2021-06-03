@@ -67,7 +67,7 @@ app.post('/create',async (req,res)=>{
    });
 
    await product.create({
-       trackingId: trakingId,
+       trakingId: trakingId,
        name: req.body.product
    });
 
@@ -108,12 +108,12 @@ app.post('/update', async (req,res)=>{
 app.post('/rastreio', async (req,res)=>{
     let response=await traking.findOne({
         where:{code:req.body.code},
-        //include:[{all:true}]
+        include:[{all:true}]
     });
     if(response === null){
         res.send(JSON.stringify(`Nenhum produto encontrado`));
     }else{
-        res.send(JSON.stringify(`Sua encomenda já está a caminho ${response.local}.`));
+        res.send(JSON.stringify(`Sua encomenda, ${response.Product.name},já está a caminho. Localização: ${response.local}.`));
     }
 });
 

@@ -107,13 +107,13 @@ app.post('/update', async (req,res)=>{
 //Exibir o local do rastreio
 app.post('/rastreio', async (req,res)=>{
     let response=await traking.findOne({
-        include:[{model:product}],
-        where:{code:req.body.code}
+        where:{code:req.body.code},
+        include: [{all:true}]
     });
     if(response === null){
         res.send(JSON.stringify(`Nenhum produto encontrado`));
     }else{
-        res.send(JSON.stringify(`Sua encomenda, ${response.Product.name},já está a caminho. Localização: ${response.local}.`));
+        res.send(JSON.stringify(`Sua encomenda, ${response.Products[0].name},já está a caminho. Localização: ${response.local}.`));
     }
 });
 

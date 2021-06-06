@@ -55,7 +55,7 @@ export default function AreaRestrita({navigation}) {
         >
 
             <Tab.Screen
-                    name="Senha"
+                    name="Usuários"
                     component={Profile}
                     options={{
                     tabBarIcon:()=>(

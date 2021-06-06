@@ -36,29 +36,18 @@ app.post('/login', async (req,res)=>{
     }
 });
 
-//alteração de senha
+//Cadastrar novo usuário
 app.post('/verifyPass',async (req,res)=>{
-    let response = await user.findOne({
-        where: {id:req.body.id, password:req.body.senhaAntiga}
-    });
-    console.log(response);
-    if(response === null)
-    {
-        res.send(JSON.stringify('Senha antiga inválida'));
-    }
-    else
-    {
         if(req.body.novaSenha === req.body.confNovaSenha)
         {
-            response.password=req.body.novaSenha;
-            response.save();
-            res.send(JSON.stringify('Senha atualizada com sucesso!'));
+            await user.create({
+                name: req.body.senhaAntiga,
+                password: req.body.novaSenha
+            });
+            res.send(JSON.stringify('Novo usuário criado com sucesso!'));
         }else{
-            res.send(JSON.stringify('Os campos Nova Senha e Confirmação são diferentes!'));
+            res.send(JSON.stringify('A confirmação de senha falhou!'));
         }
-        
-    }
-    console.log(req.body);
 });
 
 //Criação do produto no banco
@@ -100,13 +89,10 @@ app.post('/searchProduct', async (req,res)=>{
 app.post('/update', async (req,res)=>{
     let response=await traking.findOne({
         where: {code: req.body.code},
-        include: [{all:true}]
     });
     response.local=req.body.local;
     response.updatedAt=new Date();
-    response.Products[0].name=req.body.product;
     response.save();
-    response.Products[0].save();
     res.send(JSON.stringify('Dados foram atualizados com sucesso!'));
  });
 
@@ -118,7 +104,7 @@ app.post('/rastreio', async (req,res)=>{
     if(response === null){
         res.send(JSON.stringify(`Nenhum produto encontrado`));
     }else{
-        res.send(JSON.stringify(`Sua encomenda,já está a caminho. Localização: ${response.local}.`));
+        res.send(JSON.stringify(`Sua encomenda já está a caminho! Localização: ${response.local}.`));
     }
 });
 

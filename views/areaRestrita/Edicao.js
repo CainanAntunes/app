@@ -118,9 +118,10 @@ export default function Edicao({navigation}) {
 
                 <View style={css.login__input}>
                     <TextInput
-                            placeholder='Nome do Produto:'
+                            placeholder='Código do produto:'
                             onChangeText={text=>setProduct(text)}
                             value={product}
+                            style={css.inputBox}
                     />
                 </View>
 
@@ -129,6 +130,7 @@ export default function Edicao({navigation}) {
                             placeholder='Localização do Produto:'
                             onChangeText={text=>setLocalization(text)}
                             value={localization}
+                            style={css.inputBox}
                     />
                 </View>
 

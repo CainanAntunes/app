@@ -41,7 +41,7 @@ export default function Rastreio({navigation}) {
                 <Text style={css.login__buttonText}>Rastrear</Text>
             </TouchableOpacity>
 
-            <Text>{response}</Text>
+            <Text style={css.msg__rastreio}>{response}</Text>
 
         </View>
 

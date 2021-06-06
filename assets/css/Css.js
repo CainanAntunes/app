@@ -110,6 +110,24 @@ const css = StyleSheet.create({
       marginBottom: 30,
       borderColor: '#0e71a8',
       borderBottomWidth: 1,
+    },
+    inputBox:{
+      padding: 5,
+      marginTop: 5,
+      marginBottom: 5,
+      fontSize: 15,
+    },
+    texte__profile: {
+      fontSize: 25,
+      fontWeight: 'bold'
+    },
+    msg__rastreio:{
+      marginTop: 10,
+      marginBottom: 10,
+      padding: 15,
+      fontSize: 18,
+      backgroundColor:'#d2e1f6',
+      marginTop: 15
     }
   });
 

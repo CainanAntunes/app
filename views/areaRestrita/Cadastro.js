@@ -92,6 +92,7 @@ export default function Cadastro({navigation}) {
                         placeholder='Descrição do Produto:'
                         onChangeText={text=>setProduct(text)}
                         value={product}
+                        style={css.inputBox}
                 />
             </View>
 

@@ -30,7 +30,6 @@ export default function Profile({navigation}) {
         let response=await fetch(`${config.urlRoot}verifyPass`,{
             method:'POST',
             body:JSON.stringify({
-                id: idUser,
                 senhaAntiga: senhaAntiga,
                 novaSenha: novaSenha,
                 confNovaSenha: confNovaSenha
@@ -47,15 +46,15 @@ export default function Profile({navigation}) {
 
     return (
         <View style={[css.container,css.containerTop]}>
-            <MenuAreaRestrita title='Trocar Senha' navigation={navigation}/>
+            <MenuAreaRestrita title='Cadastrar Usuário' navigation={navigation}/>
 
-            <View>
-                <Text>{msg}</Text>
-                <TextInput placeholder='Senha Antiga:' onChangeText={text=>setSenhaAntiga(text)} />
-                <TextInput placeholder='Nova Senha:' onChangeText={text=>setNovaSenha(text)} />
-                <TextInput placeholder='Confirmação da Nova Senha:' onChangeText={text=>setConfNovaSenha(text)} />
+            <View style={css.container}>
+                <TextInput placeholder='Nome do usuário:' onChangeText={text=>setSenhaAntiga(text)} style={css.inputBox}/>
+                <TextInput placeholder='Senha:' onChangeText={text=>setNovaSenha(text)} style={css.inputBox}/>
+                <TextInput placeholder='Confirmação da Senha:' onChangeText={text=>setConfNovaSenha(text)} style={css.inputBox}/>
+                <Text style={css.inputBox}>{msg}</Text>
                 <TouchableOpacity style={css.login__button} onPress={()=>sendForm()}>
-                    <Text>Trocar Senha</Text>
+                    <Text>Cadastrar</Text>
                 </TouchableOpacity>
             </View>
 

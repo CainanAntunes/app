@@ -97,7 +97,7 @@ const css = StyleSheet.create({
       display:display
     }),
     rescanner__button: {
-      marginTop: 10
+      marginTop: 20
     },
     sucess__text: {
       marginTop: 10,
